@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/Sebiann/SebDiscordBot.svg?branch=master)](https://travis-ci.com/Sebiann/SebDiscordBot)
-# SebDiscordBot
-This is a small discord bot i was working on, might continue it, but cant promise.
+[![Build Status](https://travis-ci.com/Sebiann/RPG-Master.svg?branch=master)](https://travis-ci.com/Sebiann/RPG-Master)
+# RPG Master
+This is a small discord bot I am working on for my and Dargons RPG Chat
 
 ## Setup
 
