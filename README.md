@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Sebiann/RPG-Master.svg?branch=master)](https://travis-ci.com/Sebiann/RPG-Master)
+[![Build Status](https://travis-ci.com/Sebiann/RPG-Master.svg?token=FeC9pT6STUsJCvygd8QQ&branch=master)](https://travis-ci.com/Sebiann/RPG-Master)
 # RPG Master
 This is a small discord bot I am working on for my and Dargons RPG Chat
 
