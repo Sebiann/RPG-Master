@@ -1,0 +1,31 @@
+{
+  "name": "sebdiscordbot",
+  "version": "1.1.2",
+  "description": "this is a Discord bot made mainly for me, but anyone else can use it too.",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node .",
+    "test": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sebiann/SebDiscordBot.git"
+  },
+  "author": "Sebiann",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Sebiann/SebDiscordBot/issues"
+  },
+  "homepage": "https://github.com/Sebiann/SebDiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "dotenv": "^8.0.0",
+    "enmap": "^4.8.4",
+    "ffmpeg": "0.0.4",
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.29.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
