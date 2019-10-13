@@ -19,15 +19,15 @@ module.exports = {
         userscore.level--
       }
       message.channel.send(`Neuer Level: ${userscore.level}`)
-      .then(msg => {
-        msg.delete(5000)
-      })
+        .then(msg => {
+          msg.delete(5000)
+        })
     } else {
       message.channel.send('Wieviel soll ich ihn runter leveln?')
-      .then(msg => {
-        msg.delete(5000)
-      })
+        .then(msg => {
+          msg.delete(5000)
+        })
     }
     message.client.setScore.run(userscore)
   },
-};
+}

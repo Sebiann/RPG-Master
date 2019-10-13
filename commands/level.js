@@ -18,7 +18,7 @@ module.exports = {
     }
     const helpmessage = new Discord.RichEmbed()
       .setColor('#FF0000')
-      .setTitle(`Level Chart`)
+      .setTitle('Level Chart')
       .setDescription(`Name: ${args[0]}`)
       .addField('Rang:', `-${userscore.rank}`)
       .addField(`Level: ${userscore.level}`, 'Nice')
@@ -29,4 +29,4 @@ module.exports = {
         msg.delete(10000)
       })
   },
-};
+}

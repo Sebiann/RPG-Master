@@ -11,9 +11,9 @@ module.exports = {
     message.channel.send('_Messen..._').then(msg => {
       const latency = Date.now() - timeThen
       msg.edit(`Ping ist ${latency}ms`)
-      .then(msg => {
-        msg.delete(5000)
-      })
+        .then(msg => {
+          msg.delete(5000)
+        })
     })
   },
-};
+}
