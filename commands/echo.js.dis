@@ -1,3 +1,12 @@
-exports.run = (client, message, args) => {
-    
-}
+module.exports = {
+  name: 'echo',
+  aliases: [''],
+  usage: '',
+  description: '',
+  guildOnly: true,
+  args: true,
+  cooldown: 5,
+  execute(client, message, args) {
+
+  },
+};
