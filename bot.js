@@ -3,7 +3,7 @@ require('dotenv').config()
 const Discord = require('discord.js')
 const fs = require('fs')
 const SQLite = require('better-sqlite3')
-const sql = new SQLite('./ranks.sqlite')
+const sql = new SQLite('./rpg.sqlite')
 
 const client = new Discord.Client()
 
@@ -20,19 +20,33 @@ for (const file of commandFiles) {
 client.on('ready',()=>{
   console.log(`Logged in and ready to be used.. use "${process.env.PREFIX}help".`)
   // Check if the table "scores" exists.
-  const table = sql.prepare('SELECT count(*) FROM sqlite_master WHERE type=\'table\' AND name = \'scores\';').get()
-  if (!table['count(*)']) {
+  const tablescore = sql.prepare('SELECT count(*) FROM sqlite_master WHERE type=\'table\' AND name = \'scores\';').get()
+  if (!tablescore['count(*)']) {
     // If the table isn't there, create it and setup the database correctly.
-    sql.prepare('CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, rank TEXT, title TEXT, level INTEGER);').run()
+    sql.prepare('CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, rank TEXT, level INTEGER);').run()
     // Ensure that the "id" row is always unique and indexed.
     sql.prepare('CREATE UNIQUE INDEX idx_scores_id ON scores (id);').run()
     sql.pragma('synchronous = 1')
     sql.pragma('journal_mode = wal')
   }
-
   // And then we have two prepared statements to get and set the score data.
   client.getScore = sql.prepare('SELECT * FROM scores WHERE user = ? AND guild = ?')
-  client.setScore = sql.prepare('INSERT OR REPLACE INTO scores (id, user, guild, rank, title, level) VALUES (@id, @user, @guild, @rank, @title, @level);')
+  client.setScore = sql.prepare('INSERT OR REPLACE INTO scores (id, user, guild, rank, level) VALUES (@id, @user, @guild, @rank, @level);')
+
+  // Check if the table "profiles" exists.
+  const tableprofiles = sql.prepare('SELECT count(*) FROM sqlite_master WHERE type=\'table\' AND name = \'profiles\';').get()
+  if (!tableprofiles['count(*)']) {
+    // If the table isn't there, create it and setup the database correctly.
+    sql.prepare('CREATE TABLE profiles (id TEXT PRIMARY KEY, user TEXT, guild TEXT, name TEXT, title TEXT, personality TEXT, background TEXT);').run()
+    // Ensure that the "id" row is always unique and indexed.
+    sql.prepare('CREATE UNIQUE INDEX idx_profiles_id ON profiles (id);').run()
+    sql.pragma('synchronous = 1')
+    sql.pragma('journal_mode = wal')
+  }
+
+  // And then we have two prepared statements to get and set the profiles data.
+  client.getProfile = sql.prepare('SELECT * FROM profiles WHERE user = ? AND guild = ?')
+  client.setProfile = sql.prepare('INSERT OR REPLACE INTO profiles (id, user, guild, name, title, personality, background) VALUES (@id, @user, @guild, @name, @title, @personality, @background);')
 })
 
 client.on('message', message => {

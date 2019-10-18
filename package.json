@@ -1,13 +1,13 @@
 {
   "name": "RPG-Master",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "this is a Discord bot.",
   "main": "bot.js",
   "scripts": {
     "start": "node .",
     "test": "npx eslint .",
     "preversion": "npm test",
-    "version": "git add ."
+    "postversion": "git add ."
   },
   "repository": {
     "type": "git",
