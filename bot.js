@@ -42,12 +42,19 @@ client.on('message', message => {
   const commandName = args.shift().toLowerCase()
 
   const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
+    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))
 
   if (!command) return
 
   if (command.guildOnly && message.channel.type !== 'text') {
     return message.reply('I can\'t execute that command inside DMs!')
+      .then(msg => {
+        msg.delete(5000)
+      })
+  }
+
+  if (command.adminOnly && !message.member.roles.some(role => role.name === 'Owner')) {
+    return message.reply('No PERMS')
       .then(msg => {
         msg.delete(5000)
       })
@@ -106,8 +113,16 @@ client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find(ch => ch.name === 'wilkommen')
   // Do nothing if the channel wasn't found on this server
   if (!channel) return
+  member.addRole(member.guild.roles.find(role => role.name === 'Neue Seele'))
   // Send the message, mentioning the member
   channel.send(`Wilkommen ${member}`)
+  channel.send('Mit `!getrank` kannst du dir einen Rang holen')
+})
+
+// Create an event listener for leaving guild members
+client.on('guildMemberRemove', member => {
+  let userscore = { id: `${member.guild.id}-${member.id}`, user: member.id, guild: member.guild.id, rank: '', title: '', level: 0 }
+  member.client.setScore.run(userscore)
 })
 
 client.login(process.env.TOKEN)

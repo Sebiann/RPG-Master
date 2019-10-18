@@ -1,8 +1,8 @@
 module.exports = {
-  name: 'setlevel',
-  aliases: ['setlvl', 'setlv'],
-  usage: '<@User> <Number>',
-  description: 'Set Level',
+  name: 'setrank',
+  aliases: [''],
+  usage: '<@User> <Rang>',
+  description: 'Setze den Rang',
   adminOnly: true,
   guildOnly: true,
   args: true,
@@ -18,17 +18,20 @@ module.exports = {
     if (!userscore) {
       userscore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, rank: '', title: '', level: 0 }
     }
-    if (!isNaN(args[1])){
-      userscore.level = args[1]
-      if (userscore.level < 0) {
-        userscore.level = 0
-      }
-      message.channel.send(`Neuer Level: ${userscore.level}`)
+
+    if (userscore.rank === ''){
+      userscore.rank = args[1]
+      message.channel.send(`Dein Rang ist jetzt ${userscore.rank}`)
         .then(msg => {
           msg.delete(5000)
         })
     } else {
-      message.channel.send('Wieviel soll ich ihn leveln?')
+      message.channel.send(`Dein Rang war ${userscore.rank}`)
+        .then(msg => {
+          msg.delete(5000)
+        })
+      userscore.rank = args[1]
+      message.channel.send(`Dein Rang ist jetzt ${userscore.rank}`)
         .then(msg => {
           msg.delete(5000)
         })

@@ -3,12 +3,16 @@ module.exports = {
   aliases: ['remlvl', 'remlv'],
   usage: '<@User> <Number>',
   description: 'Remove Levels',
+  adminOnly: true,
   guildOnly: true,
   args: true,
   cooldown: 5,
   execute(message, args) {
     const user = message.mentions.users.first() || message.client.users.get(args[1])
     if(!user) return message.reply('Sie müssen jemanden erwähnen oder seine ID angeben!')
+      .then(msg => {
+        msg.delete(5000)
+      })
 
     let userscore = message.client.getScore.get(user.id, message.guild.id)
     if (!userscore) {
@@ -17,6 +21,9 @@ module.exports = {
     if (!isNaN(args[1])){
       for (let i = 0; i < args[1]; i++) {
         userscore.level--
+      }
+      if (userscore.level < 0) {
+        userscore.level = 0
       }
       message.channel.send(`Neuer Level: ${userscore.level}`)
         .then(msg => {

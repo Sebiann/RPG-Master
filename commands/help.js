@@ -26,6 +26,9 @@ module.exports = {
         .catch(error => {
           console.error(`Could not send help DM to ${message.author.tag}.\n`, error)
           message.reply('it seems like I can\'t DM you!')
+            .then(msg => {
+              msg.delete(5000)
+            })
         })
     }
 
@@ -34,6 +37,9 @@ module.exports = {
 
     if (!command) {
       return message.reply('that\'s not a valid command!')
+        .then(msg => {
+          msg.delete(5000)
+        })
     }
 
     data.push(`**Name:** ${command.name}`)
@@ -45,18 +51,8 @@ module.exports = {
     data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`)
 
     message.channel.send(data, { split: true })
+      .then(msg => {
+        msg.delete(10000)
+      })
   },
 }
-/*
-const helpmessage = new Discord.RichEmbed()
-.setColor('#FF0000')
-.setTitle('Help:')
-.setAuthor('still in the works')
-.setDescription('This is the Help message')
-.addField('Command List', 'ping\necho\n...', true)
-.addField('Music Command List', 'play\nq add, q list, q remove, q clear\nstop\nvol', true)
-.addField('Admin Command List', 'reload\nmreload', true)
-.setTimestamp()
-.setFooter(message.member.displayName, message.author.avatarURL)
-message.channel.send(helpmessage).catch(console.error)
-*/
