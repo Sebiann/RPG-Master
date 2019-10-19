@@ -13,7 +13,7 @@ module.exports = {
   execute(message) {
     let userscore = message.client.getScore.get(message.author.id, message.guild.id)
     if (!userscore) {
-      userscore = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, rank: '', level: 0 }
+      userscore = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, rank: '', specificrank: '', level: 0 }
     }
 
     const rankCounts = new Discord.Collection()

@@ -16,7 +16,7 @@ module.exports = {
 
     let userscore = message.client.getScore.get(user.id, message.guild.id)
     if (!userscore) {
-      userscore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, rank: '', level: 0 }
+      userscore = { id: `${message.guild.id}-${user.id}`, user: user.id, guild: message.guild.id, rank: '', specificrank: '', level: 0 }
     }
 
     if (userscore.rank === ''){

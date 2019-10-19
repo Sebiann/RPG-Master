@@ -23,7 +23,7 @@ client.on('ready',()=>{
   const tablescore = sql.prepare('SELECT count(*) FROM sqlite_master WHERE type=\'table\' AND name = \'scores\';').get()
   if (!tablescore['count(*)']) {
     // If the table isn't there, create it and setup the database correctly.
-    sql.prepare('CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, rank TEXT, level INTEGER);').run()
+    sql.prepare('CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, rank TEXT, specificrank TEXT, level INTEGER);').run()
     // Ensure that the "id" row is always unique and indexed.
     sql.prepare('CREATE UNIQUE INDEX idx_scores_id ON scores (id);').run()
     sql.pragma('synchronous = 1')
@@ -31,7 +31,7 @@ client.on('ready',()=>{
   }
   // And then we have two prepared statements to get and set the score data.
   client.getScore = sql.prepare('SELECT * FROM scores WHERE user = ? AND guild = ?')
-  client.setScore = sql.prepare('INSERT OR REPLACE INTO scores (id, user, guild, rank, level) VALUES (@id, @user, @guild, @rank, @level);')
+  client.setScore = sql.prepare('INSERT OR REPLACE INTO scores (id, user, guild, rank, specificrank, level) VALUES (@id, @user, @guild, @rank, @specificrank, @level);')
 
   // Check if the table "profiles" exists.
   const tableprofiles = sql.prepare('SELECT count(*) FROM sqlite_master WHERE type=\'table\' AND name = \'profiles\';').get()
@@ -130,12 +130,12 @@ client.on('guildMemberAdd', member => {
   member.addRole(member.guild.roles.find(role => role.name === 'Neue Seele'))
   // Send the message, mentioning the member
   channel.send(`Wilkommen ${member}`)
-  channel.send('Mit `!getrank` kannst du dir einen Rang holen')
+  channel.send('Schreib `!getrank` in <#633189131760959498> damit du dir einen Rang holen kannst')
 })
 
 // Create an event listener for leaving guild members
 client.on('guildMemberRemove', member => {
-  let userscore = { id: `${member.guild.id}-${member.id}`, user: member.id, guild: member.guild.id, rank: '', title: '', level: 0 }
+  let userscore = { id: `${member.guild.id}-${member.id}`, user: member.id, guild: member.guild.id, rank: '', specificrank: '', level: 0 }
   member.client.setScore.run(userscore)
 })
 
