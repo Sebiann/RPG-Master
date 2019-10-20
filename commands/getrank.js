@@ -50,14 +50,21 @@ module.exports = {
         userscore.rank = 'Mensch'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Mensch'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Erd-Portal'))
+        userscore.level = 1
       } else if (angels === 0) {
         userscore.rank = 'Engel'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Engel'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Himmel-Portal'))
+        userscore.level = 1
       } else if (demons === 0) {
         userscore.rank = 'Dämon'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Dämon'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Höllen-Portal'))
+        userscore.level = 1
+
       }
 
       if(chancehumans > chanceangels && chancehumans > chancedemons){
@@ -92,16 +99,19 @@ module.exports = {
         userscore.rank = 'Mensch'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Mensch'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Erd-Portal'))
         userscore.level = 1
       } else if (randNum < chancehumans + chanceangels) {
         userscore.rank = 'Engel'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Engel'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Himmel-Portal'))
         userscore.level = 1
       } else if (randNum > chancehumans + chanceangels) {
         userscore.rank = 'Dämon'
         message.member.removeRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
         message.member.addRole(message.member.guild.roles.find(role => role.name === 'Dämon'))
+        message.member.addRole(message.member.guild.roles.find(role => role.name === 'Höllen-Portal'))
         userscore.level = 1
       }
       message.channel.send(`Dein Rang ist: ${userscore.rank}`)

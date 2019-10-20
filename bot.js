@@ -67,7 +67,7 @@ client.on('message', message => {
       })
   }
 
-  if (command.adminOnly && !message.member.roles.some(role => role.name === 'Owner')) {
+  if (command.adminOnly && !message.member.roles.some(r=>['Owner', 'Admin', 'Gott', 'Satan'].includes(r.name))) {
     return message.reply('No PERMS')
       .then(msg => {
         msg.delete(5000)

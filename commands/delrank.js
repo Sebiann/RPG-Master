@@ -24,6 +24,9 @@ module.exports = {
       guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Mensch'))
       guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Engel'))
       guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Dämon'))
+      guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Erd-Portal'))
+      guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Himmel-Portal'))
+      guilduser.removeRole(message.member.guild.roles.find(role => role.name === 'Höllen-Portal'))
       guilduser.addRole(message.member.guild.roles.find(role => role.name === 'Neue Seele'))
       userscore.rank = ''
       message.channel.send('Dein Rang ist jetzt Leer')
